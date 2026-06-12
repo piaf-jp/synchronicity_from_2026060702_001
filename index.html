@@ -1939,6 +1939,27 @@ ${res.adviceResult}\n\n`;
                             認証して開始
                         </button>
                     </div>
+                    <div className="mt-8 pt-6 border-t border-gray-700/50 text-center">
+                      <p className="text-[10px] text-gray-400 mb-3">
+                          ※アプリが更新されない場合や、動作が重い場合はこちら
+                      </p>
+                      <button
+                          onClick={() => {
+                              // ① ローカルストレージ（保存された古いデータ）を全て初期化
+                              localStorage.clear();
+                              sessionStorage.clear();
+            
+                              // ② キャッシュバスティング（URLの末尾にランダムな時間を付けて強制リロード）
+                              // これによりSafariは「違うURLだ！」と勘違いし、強制的に最新のプログラムをダウンロードします
+                              const timestamp = new Date().getTime();
+                              window.location.href = window.location.pathname + '?v=' + timestamp;
+                          }}
+                          className="text-xs text-gray-400 underline hover:text-white transition-colors flex items-center justify-center gap-1 mx-auto"
+                      >
+                          <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
+                          キャッシュを強制クリアして最新版を読み込む
+                      </button>
+                  </div>
                 </div>
             );
         };
